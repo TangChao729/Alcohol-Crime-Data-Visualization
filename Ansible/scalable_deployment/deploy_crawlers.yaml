@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars_files:
+    - host_vars/nectar.yaml
+  gather_facts: true
+  tasks:
+    # - debug:
+    #     var: instance_names
+    - set_fact:
+        instance_names_list: "{{ instance_names.split(' ') }}"
+    
+    # get current date-time
+    - name: Get the current date-time
+      set_fact:
+        current_date_time: "{{ lookup('pipe', 'date -u +\\%Y\\%m\\%d\\%H\\%M') }}"
+    # - debug:
+    #     var: instance_names_list
+    - name: Create instances
+      include_role:
+        name: openstack-instance
+      vars:
+        instance_name: "{{ instance_names_list[item|int - 1] }}"
+      with_sequence: count={{ n }}
+      register: instance_creation
+
+- hosts: MASTODON_CRAWLER
+  gather_facts: true
+  roles:
+    - role: mc-common
+    - role: mc-docker
+    - role: mc-crawler
+      vars:
+        Server_to_crawl: "{{ Server_to_crawl }}"
+        CouchDB_IP: "{{ CouchDB_IP }}"
+        Database: "{{ Database }}"

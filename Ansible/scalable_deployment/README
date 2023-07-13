@@ -1,0 +1,30 @@
+This ansible playbooks are used to:
+
+1. create multiple instances and deploy Mastodon crawler service on each of the
+   instances.
+
+   To start deployment, in terminal of current directory type in "./deploy_crawlers.sh"
+   Follow the prompt to input (1) number of instance to deploy, (2) Mastodon server
+   to crawl from, (3) database ip and (4) database name to store crawled data.
+
+   The playbook will ask to verify instance creation, and require password. Typing
+   password from MRC_password.txt
+
+   The playbook will then do its work, the output from terminal is saved in 
+   ./outputs/deploy.txt
+
+   Created instances information is saved in ./deployed_ips/data_time.txt
+
+
+2. delete multiple instances
+   
+   To delete multiple instance at once, we use the previous generated txt file.
+   To start deployment, in terminal of current directory type in "./delete_instances.sh"
+   Follow the prompt to input (1) txt file that saves existing instance info.
+
+   The playbook will ask to verify instance creation, and require password. Typing
+   password from MRC_password.txt
+
+   The playbook will then do its work, the output from terminal is saved in 
+   ./outputs/delete.txt
+

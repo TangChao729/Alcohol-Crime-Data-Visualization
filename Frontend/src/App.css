@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#sidebar {
+  width: 100px;
+  height: 100vh;
+  position: fixed;
+  background-color: #eee;
+  text-align: center;
+  z-index: 1;
+}
+
+.navbar {
+  /* text-align: right; */
+  text-align: center;
+  left: 25px;
+  display: block;
+  position: fixed;
+  /* right: 0; */
+  /* top: 30px; */
+}
+
+.navlink{
+  text-align: center;
+  color: #8ab4f8;
+}
+
+#page {
+  /* width: 100%;
+  height: 100%; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding-left: 240;
+}
+
+.map-container {
+  height: 100vh;
+  }
+   
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 20;
+  left: 20;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+.button1 {
+  /* background-color:transparent; */
+  background-color: rgba(30, 55, 80, 0.9);
+  color: #fff;
+  border: 1px solid gray;
+  border-radius: 4px;
+  font-weight: 525;
+  margin-right: 15px;
+  height: 45px;
+}
+
+.Icon {
+  font-size: 25px;
+}
+
+.chart-title {
+  font-size: large;
+  font-weight: 700;
+}
+.root {
+  height: 100vh;
+  width: 100vw;
+}

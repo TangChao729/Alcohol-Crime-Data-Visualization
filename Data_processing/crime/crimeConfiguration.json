@@ -1,0 +1,4 @@
+{
+  "attributes": ["lga_code", "lga_name11", "Trading Hours", "After 11 pm", "Address", "Suburb", "Postcode","Latitude","Longitude","Region"],
+  "folder": "D:\\COMP90024AS2\\data\\crime"
+}

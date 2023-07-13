@@ -1,0 +1,14 @@
+---
+# volumes:
+#   - device: /dev/vdb
+#     mountpoint: /mnt
+#   # - device: /dev/vdc
+#   #   mountpoint: /data
+
+fb_dir: front_and_backend
+
+# Wordpress / MySQL
+# database_name: wordpress
+# database_user: wordpress
+# database_password: wordpress
+# mysql_root_password: "P@ssw0rd"

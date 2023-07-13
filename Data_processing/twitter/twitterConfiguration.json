@@ -1,0 +1,7 @@
+{
+  "attributes": [],
+  "file": "D:\\COMP90024AS2\\data\\twitter\\twitterWithGeo.json",
+  "couchdb_ip": "172.26.134.184",
+  "couchdb_port": 5984,
+  "couchdb_name": "tweet_data"
+}

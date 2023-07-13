@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Delete instances
+      openstack.cloud.server:
+        state: absent
+        name: "{{ item }}"
+      loop: "{{ instance_names.split(' ') }}"
+      when: item != ''

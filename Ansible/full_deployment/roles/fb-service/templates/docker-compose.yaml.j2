@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  backend:
+    image: taytang91/backend_18052023
+    restart: always
+    environment:
+      - FLASK_APP=app.py
+      - DATABASE_ADDRESS={{ database_ip }}
+      - DATABASE_PORT=5984
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=password
+    ports:
+      - "5000:5000"
+
+  frontend:
+    image: taytang91/frontend_19052023
+    restart: always
+    environment:
+      - REACT_APP_BASE_URL={{ backend_url }}
+    ports:
+      - "80:3000"

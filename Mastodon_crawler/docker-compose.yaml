@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  mastodon-crawler:
+    build: .
+    container_name: mastodon
+    restart: always
+    environment:
+      - SERVER_URL=https://mastodon.au
+      - TOKEN=oGi9Wei1yWjj2LGgoRXRJMmKP7gqg0SmWztY7wVwEPc
+      - DATABASE_NAME=m2

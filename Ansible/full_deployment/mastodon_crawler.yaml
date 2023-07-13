@@ -1,0 +1,42 @@
+- hosts: localhost
+  vars_files:
+    - host_vars/nectar.yaml
+  gather_facts: true
+
+  roles:
+    - role: openstack-common
+    # - role: openstack-volume
+    - role: openstack-security-group
+    - role: openstack-instance
+
+- hosts: COMP90024
+  vars_files:
+    - host_vars/mastodon_crawler.yaml
+  gather_facts: true
+
+  roles:
+    - role: mc-common
+    - role: mc-volumes
+    - role: mc-docker
+    - role: mc-crawler
+
+- hosts: localhost
+  vars_files:
+    - host_vars/nectar2.yaml
+  gather_facts: true
+
+  roles:
+    - role: openstack2-common
+    - role: openstack2-security-group
+    - role: openstack2-instance
+
+- hosts: FRONT_AND_BACKEND
+  vars_files:
+    - host_vars/front_and_backend.yaml
+  gather_facts: true
+
+  roles:
+    - role: fb-common
+    # - role: fb-volumes
+    - role: fb-docker
+    - role: fb-service

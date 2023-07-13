@@ -1,0 +1,77 @@
+---
+# Create an instance on NeCTAR
+- name: Create a snapshot of the existing volume
+  openstack.cloud.volume_snapshot:
+    display_name: presentation_volume_snapshot_demo
+    volume: presentation_volume
+    state: present
+  register: os_vol_snapshot
+
+- name: Create a new volume from the snapshot
+  openstack.cloud.volume:
+    display_name: presentation_volume_demo
+    size: "{{ os_vol_snapshot.snapshot.size }}"
+    snapshot_id: "{{ os_vol_snapshot.snapshot.id }}"
+    state: present
+  register: new_os_vol
+
+- ansible.builtin.debug:
+    msg: "New volume {{ new_os_vol.volume.id }} has been created."
+
+- name: Create an instance
+  openstack.cloud.server:
+    name: "{{ item.name }}"
+    auto_floating_ip: false
+    availability_zone: "{{ availability_zone }}"
+    flavor: "{{ instance_flavor }}"
+    image: "{{ instance_image }}"
+    key_name: "{{ instance_key_name }}"
+    # network: "{{ instance_network }}"
+    security_groups: "{{ sg_names }}"
+    timeout: 600
+    volumes: "{{ new_os_vol.volume.id }}"
+    # volumes: "{{ item.volumes }}"
+    state: present
+    wait: true
+  loop: "{{ instances }}"
+  register: os_instance
+
+- ansible.builtin.debug:
+    msg: "Instance {{ item.server.name }} has been created. IP address is {{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+  loop: "{{ os_instance.results }}"
+  when: item.server is defined
+
+- name: Wait for connection
+  ansible.builtin.wait_for:
+    host: "{{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+    port: 22
+    timeout: 300
+    search_regex: OpenSSH
+  loop: "{{ os_instance.results }}"
+  when: item.server is defined
+
+- name: Define the database IP
+  set_fact:
+    couchdb_ip: "{{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+  delegate_to: "{{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+  loop: "{{ os_instance.results }}"
+  when: item.server is defined
+
+# Add hosts to Ansible in-memory inventory
+- name: Add host
+  ansible.builtin.add_host:
+    name: "{{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+    groups: COMP90024
+  loop: "{{ os_instance.results }}"
+  when: item.server is defined
+
+- debug: 
+    msg: "Database IP is set to: {{ couchdb_ip }}"
+
+- name: Save the database IP to a file
+  copy:
+    content: "{{ item['server']['addresses']['qh2-uom-internal'][0]['addr'] }}"
+    dest: "/Users/taylortang/Life-at-UniMelb/Semester_3/COMP90024_CCC/As2/cloud-computing-project/Code/Ansible/full_deployment/tmp/couchdb_ip"
+  delegate_to: localhost
+  loop: "{{ os_instance.results }}"
+  when: item.server is defined

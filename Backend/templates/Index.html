@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Title</title>
+</head>
+<body>
+  <h1>
+    You are viewing Taylor's backend index.html, to use this backend service, you can access the couchDB database by using:
+  </h1>
+  <ul>
+    <li>Curl command in terminal</li>
+    <li>Axios api of React</li>
+    <li>Or, Postman app (for testing and demonstration)</li>
+  </ul>
+  <p>
+    The backend implemented RESTful design, which provides a standard access method providing a great deal of flexibility for future development. Implemented method including:
+  </p>
+  <ul>
+    <li>get(_id): used for retrieving a single document by document id</li>
+    <li>post(_obj): used for create a document in the database</li>
+    <li>put(_id,_obj): used for update a document by id</li>
+    <li>delete(_id): used for detele a document by id</li>
+  </ul>
+  <p>
+    Moreover, these methods are developed to:
+  </p>
+  <ul>
+    <li>view(_name): used to lookup an existing view in database</li>
+    <li>query(_query): used to query the database with a query json, and receive result</li>
+  </ul>
+  <h2>To access using curl command:</h2>
+  <pre>
+get(_id): 
+curl -X GET http://database_address:port/&lt;database_name&gt;/&lt;id&gt;
+
+post(_obj): 
+curl -X POST -H "Content-Type: application/json" \
+-d '{"value": “something”}' \ 
+http://database_address:port/&lt;database_name&gt;
+
+put(_id,_obj): 
+curl -X POST -H "Content-Type: application/json" \
+        -d '{"value": “something”}' \ 
+http://database_address:port/&lt;database_name&gt;/&lt;id&gt;
+
+delete(_id): 
+curl -X DELETE http://database_address:port/&lt;database_name&gt;/&lt;id&gt;
+  </pre>
+  <h2>To query database:</h2>
+  <pre>
+curl -X POST -H "Content-Type: application/json" \
+         -d '{"query": {"selector": {"language": {"$eq": "jp"}}}}' \
+         http://database_address:port/&lt;database_name&gt;/query
+  </pre>
+  <h2>To retrieve view:</h2>
+  <pre>
+curl -X GET http://database_address:port/&lt;database_name&gt;/view/&lt;doc_name&gt;/&lt;view_name&gt;
+  </pre>
+  <p>
+    You should get a gist of how to access the database by now, no matter using Axios api, or Postman app. If any question, ask ask ask ask :P
+  </p>
+</body>
+</html>

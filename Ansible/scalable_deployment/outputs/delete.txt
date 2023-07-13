@@ -1,0 +1,27 @@
+ansible-playbook [core 2.14.5]
+  config file = None
+  configured module search path = ['/Users/taylortang/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /opt/homebrew/Cellar/ansible/7.5.0/libexec/lib/python3.11/site-packages/ansible
+  ansible collection location = /Users/taylortang/.ansible/collections:/usr/share/ansible/collections
+  executable location = /opt/homebrew/bin/ansible-playbook
+  python version = 3.11.3 (main, Apr  7 2023, 20:13:31) [Clang 14.0.0 (clang-1400.0.29.202)] (/opt/homebrew/Cellar/ansible/7.5.0/libexec/bin/python3.11)
+  jinja version = 3.1.2
+  libyaml = True
+No config file found; using defaults
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: delete_instances.yaml ************************************************
+1 plays in delete_instances.yaml
+
+PLAY [localhost] ***************************************************************
+
+TASK [Delete instances] ********************************************************
+task path: /Users/taylortang/Life-at-UniMelb/Semester_3/COMP90024_CCC/As2/cloud-computing-project/Code/Ansible/scalable_deployment/delete_instances.yaml:5
+changed: [localhost] => (item=mastodon_crawler_01_mastodon_au_172_26_130_104_mt) => {"ansible_loop_var": "item", "changed": true, "item": "mastodon_crawler_01_mastodon_au_172_26_130_104_mt"}
+changed: [localhost] => (item=mastodon_crawler_02_mastodon_au_172_26_130_104_mt) => {"ansible_loop_var": "item", "changed": true, "item": "mastodon_crawler_02_mastodon_au_172_26_130_104_mt"}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

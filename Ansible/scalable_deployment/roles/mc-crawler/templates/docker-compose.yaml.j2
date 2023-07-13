@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  mastodon:
+    image: taytang91/mastodon_sentiment
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      SERVER_URL: "{{ Server_to_crawl }}"
+      TOKEN: "None"
+      DATABASE_IP: "{{ CouchDB_IP }}"
+      DATABASE_PORT: "5984"
+      DATABASE_USER: "admin"
+      DATABASE_PASSWORD: "your-password"
+      DATABASE_NAME: {{ Database }}
